@@ -18,6 +18,7 @@ const Login = () => {
     if (res.success) {
       enqueueSnackbar("Login successful", { variant: "success" });
       
+      console.log(res.user);
       
       if (res.user.role === "admin") {
         navigate("/admin");
