@@ -1,29 +1,34 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { MdOutlineAddBox } from "react-icons/md";
 import ToursList from "../pages/ToursList";
 import { useSnackbar } from "notistack";
+import { AuthContext } from "../context/AuthContext";
 
 const AdminDash = () => {
   const [tours, setTours] = useState([]);
   const { enqueueSnackbar } = useSnackbar();
-  const user = JSON.parse(localStorage.getItem("userData"));
+  const { user, token } = useContext(AuthContext); 
 
   useEffect(() => {
-    axios
-      .get("https://lucy-travels-backend.vercel.app/tours", {
-        headers: {
-          Authorization: `Bearer ${user.token}`,
-        },
-      })
-      .then((response) => {
-        setTours(response.data);
-      })
-      .catch((error) => {
-        enqueueSnackbar("Error fetching tours", { variant: "error" });
-      });
-  }, []);
+    if (user && token) {
+      axios
+        .get("https://lucy-travels-backend.vercel.app/tours", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          setTours(response.data);
+        })
+        .catch((error) => {
+          enqueueSnackbar("Error fetching tours", { variant: "error" });
+        });
+    } else {
+      enqueueSnackbar("User not authenticated", { variant: "error" });
+    }
+  }, [user, token, enqueueSnackbar]); 
 
   return (
     <div className="container p-4">

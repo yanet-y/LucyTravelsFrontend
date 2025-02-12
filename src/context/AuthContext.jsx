@@ -22,14 +22,14 @@ const AuthProvider = ({ children }) => {
   const login = async (email, password) => {
     try {
       const res = await axios.post("https://lucy-travels-backend.vercel.app/auth/login", { email, password });
-      console.log(res.data.user);
-      setUser(res.data.user);
-      setToken(res.data.token);
+      setUser(res.data.user);  
+      setToken(res.data.token); 
       return { success: true, user: res.data.user };
     } catch (error) {
       return { success: false, message: error.response?.data?.message || "Login failed" };
     }
   };
+  
 
   
   const register = async (name, email, password) => {
