@@ -9,7 +9,7 @@ import Home from "./pages/Home";
 import TourDetails from "./pages/TourDetails";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import AdminDashboard from "./pages/AdminDash";
+import AdminDash from "./pages/AdminDash";
 import ManageBookings from "./pages/ManageBookings";
 import BookingDetails from "./pages/BookingDetails";
 import PrivateRoute from "./components/PrivateRoute";
@@ -30,7 +30,7 @@ const App = () => {
         <Route path="/home" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/admin" element={<PrivateRoute admin><AdminDashboard /></PrivateRoute>} />
+        <Route path="/admin" element={<PrivateRoute admin><AdminDash /></PrivateRoute>} />
         <Route path="/admin/tours/create" element={<PrivateRoute admin><CreateTour /></PrivateRoute>} />
         <Route path="/admin/tours/edit/:id" element={<PrivateRoute admin><EditTour /></PrivateRoute>} />
         <Route path="/tours/details/:id" element={<TourDetails />} />
